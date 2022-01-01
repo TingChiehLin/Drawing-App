@@ -5,6 +5,8 @@ import Header from "./layout/Header";
 import ColorSelector from "./components/ColorSelector";
 import DrawingBoard from "./components/DrawingBoard";
 
+import { colorActions } from "./store";
+
 const Reset = () => {
     return (
         <div className="flex justify-center items-center mb-6">
@@ -21,25 +23,22 @@ const Reset = () => {
 function App() {
 
     const dispatch = useDispatch();
-    const color = useSelector( (state:RootStateOrAny) => state.color);
+    const color = useSelector( (state:RootStateOrAny) => state.color.value);
+    console.log("Redux Color:,",color)
 
-    const changeBlueHandle = () => dispatch({color: 'blue'})
-
-
-    const changeOrangleHandle = () => dispatch({color: 'orange'})
-
-    const changePurpleHandle = () => dispatch({color: 'purple'})
-
+    const changeBlueHandle = () => dispatch(colorActions.changeBlue())
+    const changeYellowHandle = () => dispatch(colorActions.changeYellow())
+    const changePurpleHandle = () => dispatch(colorActions.changePurple())
     return (
         <div>
             <Header title={"Drawing App"}/>
             <div className="h-32 w-full flex justify-center items-center gap-4">
                 <ColorSelector color={"blue"} changeColorHandle={changeBlueHandle}/>
-                <ColorSelector color={"yellow"} changeColorHandle={changeOrangleHandle}/>
+                <ColorSelector color={"yellow"} changeColorHandle={changeYellowHandle}/>
                 <ColorSelector color={"purple"} changeColorHandle={changePurpleHandle}/>
             </div>
             {Reset()}
-            <DrawingBoard/>
+            <DrawingBoard color={color}/>
         </div>
     );
 }

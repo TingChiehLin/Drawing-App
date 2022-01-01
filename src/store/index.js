@@ -1,29 +1,30 @@
-import {createStore} from "redux";
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const selectorReducer = (state = {color:'black'}, action) => {
+const initialState = { value: 'black' }
 
-    if (action.type === 'blue') {
-        return {
-            color: 'blue'
-        };
+const changeColorSlice = createSlice({
+    name: 'color',
+    initialState,
+    reducers: {
+        changeBlue(state) {
+            state.value = 'blue'
+        },
+        changeYellow(state) {
+            state.value = 'yellow'
+        },
+        changePurple(state) {
+            state.value = 'purple'
+        }
     }
+});
 
-    if (action.type === 'yellow') {
-        return {
-            color: 'yellow'
-        };
+const store = configureStore({
+    reducer: {
+        color: changeColorSlice.reducer
     }
+});
 
-    if (action.type === 'purple') {
-        return {
-            color: 'purple'
-        };
-    }
-
-    return state;
-};
-
-const store = createStore(selectorReducer);
+export const colorActions = changeColorSlice.actions;
 
 export default store;
 

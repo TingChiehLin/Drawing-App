@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 type Props = {
-    color:string,
+    color: string,
     changeColorHandle: () => void
 }
 
-const ColorSelector = ({color, changeColorHandle}:Props) => {
-    // const [currentColor, setcurrentColor] = useState<string | null>("black")
-
+const ColorSelector = ({color, changeColorHandle}: Props) => {
     return (
         <button
             className={`bg-${color}-500 rounded-full h-24 w-24`}
-            onClick={changeColorHandle}
+            onClick={() => {
+                changeColorHandle()
+            }}
         >
         </button>
     );
