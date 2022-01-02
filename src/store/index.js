@@ -1,5 +1,7 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
+// import React,{useRef} from 'react';
 
+// const initialCanvasRef = { canvasRef: useRef<CanvasRenderingContext2D | null>(null) }
 const initialState = { value: 'black' }
 
 const changeColorSlice = createSlice({
