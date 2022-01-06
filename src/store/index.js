@@ -1,8 +1,6 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit';
-// import React,{useRef} from 'react';
+import {createSlice, configureStore} from '@reduxjs/toolkit';
 
-// const initialCanvasRef = { canvasRef: useRef<CanvasRenderingContext2D | null>(null) }
-const initialState = { value: 'black' }
+const initialState = {value: 'black'}
 
 const changeColorSlice = createSlice({
     name: 'color',
@@ -20,13 +18,25 @@ const changeColorSlice = createSlice({
     }
 });
 
+const resetSlice = createSlice({
+    name: 'reset',
+    initialState: {value: 0},
+    reducers: {
+        resetTime(state) {
+            state.value = +new Date()
+        },
+    }
+});
+
 const store = configureStore({
     reducer: {
-        color: changeColorSlice.reducer
+        color: changeColorSlice.reducer,
+        reset: resetSlice.reducer
     }
 });
 
 export const colorActions = changeColorSlice.actions;
+export const resetAction = resetSlice.actions
 
 export default store;
 

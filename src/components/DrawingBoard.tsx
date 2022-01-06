@@ -4,6 +4,7 @@ import {RootStateOrAny, useSelector,} from "react-redux";
 const DrawingBoard = () => {
 
     const color = useSelector((state:RootStateOrAny) => state.color.value);
+    const time = useSelector((state:RootStateOrAny)=> state.reset.value)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const contextRef = useRef<CanvasRenderingContext2D | null>(null)
@@ -17,6 +18,7 @@ const DrawingBoard = () => {
         canvas.height = window.innerHeight * 2
         canvas.style.width = `${window.innerWidth}px`
         canvas.style.height = `${window.innerHeight}px`
+
         const clientRect = canvas.getBoundingClientRect()
         setOffsetX(clientRect.left)
         setOffsetY(clientRect.top)
@@ -26,7 +28,14 @@ const DrawingBoard = () => {
         context.strokeStyle = color
         context.lineWidth = 10
         contextRef.current = context
+    }, [time]);
+
+    useEffect(() => {
+        if (contextRef.current) {
+            contextRef.current.strokeStyle = color
+        }
     }, [color]);
+
 
     const startDrawing = (event: React.MouseEvent) => {
         const {clientX, clientY} = event;

@@ -5,20 +5,17 @@ import Header from "./layout/Header";
 import ColorSelector from "./components/ColorSelector";
 import DrawingBoard from "./components/DrawingBoard";
 
-import {colorActions} from "./store";
+import {colorActions, resetAction} from "./store";
 
 const Reset = () => {
+    const dispatch = useDispatch();
+
     return (
         <div className="flex justify-center items-center mb-6">
             <button
                 className="rounded-full py-3 px-6 bg-green-300"
                 onClick={
-                    () => console.log("Rest")
-                    //Reset black color
-                    //and clean all of color
-                    // const canvas = document.getElementById('canvas');
-                    // const ctx = canvas.getContext('2d');
-                    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    () => dispatch(resetAction.resetTime())
                 }
             >
                 Reset
